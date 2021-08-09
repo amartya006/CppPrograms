@@ -1,0 +1,1 @@
+{"group":"local","interactive":false,"local":true,"memoryLimit":1024,"name":"Local: matrix_transpose","srcPath":"d:\\C++  Apna College\\C++ Programs\\matrix_transpose.cpp","tests":[{"id":1610178167821,"input":"4\n15 23 62 41\n12 23 42 58\n41 15 62 36\n48 85 25 22","output":""}],"timeLimit":3000,"url":"d:\\C++  Apna College\\C++ Programs\\matrix_transpose.cpp"}
