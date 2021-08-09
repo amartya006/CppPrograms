@@ -11,6 +11,17 @@ class node{
     }
 };
 
+int length(node* head){
+    int count = 1;
+    node* temp = head;
+    while(temp != NULL){
+        temp= temp->next;
+        count++;
+    }
+
+    return count;
+}
+
 void insertAtHead(node* &head, int val){
     node* n = new node(val);
     n->next =head;
@@ -161,17 +172,103 @@ void removeCycle(node* &head){
     slow->next = NULL;
 }
 
+void appendKNodes(node* &head, int k, int l){
+    node* temp = head;
+    int count = 1;
+    node* newHead;
+    node* newTail;
+    while(temp->next != NULL){
+        if(count == l-k){
+            newTail = temp;
+        } else if(count == l-k+1){
+            newHead = temp;
+            
+
+        }
+        count++;
+        temp = temp -> next;
+    }
+    temp->next = head;
+    newTail->next = NULL;
+    head = newHead;
+    
+}
+
+void intersect(node* &head1, node* &head2, int pos){
+    node* temp1 = head1;
+    pos--;
+    while(pos--){
+        temp1 = temp1 -> next;
+    }
+    node* temp2 = head2;
+    while(temp2->next != NULL){
+        temp2 = temp2->next;
+    }
+    temp2 -> next = temp1;
+}
+
+int intersectionPoint(node* head1, node* head2){
+    int l1 = length(head1);
+    int l2 = length(head2);
+    int d = 0;
+    node* temp1;
+    node* temp2;
+
+    if(l1>l2){
+        d = l1-l2;
+        temp1 = head1;
+        temp2 = head2;
+    } else {
+        d = l2-l1;
+        temp1 = head2;
+        temp2 = head1;
+    }
+
+    while(d){
+        if(temp1 != NULL){
+            temp1 = temp1 -> next;
+        } else{
+            // cout<<"hello1"<<endl;
+            return -1;
+        }
+        d--;
+    }
+
+    while(temp1 != NULL && temp2 != NULL){
+        
+        if(temp1 == temp2){
+            return temp1->data;
+        }
+        temp1 = temp1 -> next;
+        temp2 = temp2 -> next;
+    }
+    cout<<"hello2"<<endl;
+    return -1;
+}
+
 
 
 int main(){
     node* head = NULL;
+    insertAtTail(head, 11);
+    insertAtTail(head, 18);
     insertAtTail(head, 1);
     insertAtTail(head, 5);
     insertAtTail(head, 8);
     insertAtTail(head, 10);
-    insertAtHead(head, 5);
-    insertAtHead(head, 11);
+    insertAtTail(head, 5);
+    insertAtTail(head, 11);
     
+    node* head2 = NULL;
+    insertAtTail(head2, 16);
+    insertAtTail(head2, 50);
+    insertAtTail(head2, 17);
+    // display(head);
+    // appendKNodes(head, 2, 6);
+    intersect(head, head2, 6);
+    cout<<intersectionPoint(head, head2)<<endl;
+    display(head);
+    display(head2);
     // display(head);
     // node* newHead = reversek(head,2);
     // display(head);
@@ -180,11 +277,11 @@ int main(){
     // deleteAtHead(head);
     // deleteAtHead(head);
     // deletion(head, 11);
-    makecycle(head, 3);
-    cout<<detectCycle(head)<<endl;
-    removeCycle(head);
-    cout<<detectCycle(head)<<endl;
-    display(head);
+    // makecycle(head, 3);
+    // cout<<detectCycle(head)<<endl;
+    // removeCycle(head);
+    // cout<<detectCycle(head)<<endl;
+    // display(head);
     // display(head);
     
     // node* myHead = reverse(head);
