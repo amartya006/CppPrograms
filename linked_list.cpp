@@ -247,28 +247,108 @@ int intersectionPoint(node* head1, node* head2){
 }
 
 
+node* mergeSorted(node* &head1, node* &head2){
+    node* dummyNode = new node(0);
+    node* temp1 = head1;
+    node* temp2 = head2;
+    node* temp3 = dummyNode;
+    while(temp2 != NULL || temp1 != NULL){
+        if(temp1 == NULL && temp2 != NULL){
+            temp3->next = temp2;
+            temp2= temp2-> next;
+        } else if(temp2 == NULL && temp1 != NULL){
+            temp3->next = temp1;
+            temp1 = temp1-> next;
+        }
+        else if(temp1-> data < temp2 ->data){
+            temp3->next = temp1;
+            temp1 = temp1 -> next;
+        } else if(temp2->data < temp1->data){
+            temp3->next = temp2;
+            temp2 = temp2 ->next;
+        }
+        temp3 = temp3->next;
+    }
+    
+    return dummyNode->next;
+}  
+
+node* mergeSorted2(node* &head1, node* &head2){
+    node* dummyNode = new node(0);
+    node* temp1 = head1;
+    node* temp2 = head2;
+    node* temp3 = dummyNode;
+    while(temp1 != NULL && temp2 != NULL){
+        if(temp1-> data < temp2 ->data){
+            temp3->next = temp1;
+            temp1 = temp1 -> next;
+        } else if(temp2->data < temp1->data){
+            temp3->next = temp2;
+            temp2 = temp2 ->next;
+        }
+        temp3 = temp3->next;
+    }
+
+    while(temp1!=NULL){
+        temp3->next = temp1;
+        temp1 = temp1 ->next;
+        temp3 = temp3 ->next;
+    }
+
+    while(temp2!=NULL){
+        temp3->next = temp2;
+        temp2 = temp2 ->next;
+        temp3 = temp3 ->next;
+    }
+    
+    return dummyNode->next;
+}
+
+node* mergeRecursive(node* &head1, node* &head2){
+    if(head1==NULL){
+        return head2;
+    }
+    if(head2 == NULL){
+        return head1;
+    }
+
+    node* result;
+    if(head1 -> data > head2 -> data){
+        result = head1;
+        result-> next = mergeRecursive(head1-> next, head2);
+    } else{
+        result = head2;
+        result-> next = mergeRecursive(head1, head2->next);
+    }
+
+    return result;
+}
+
 
 int main(){
     node* head = NULL;
     insertAtTail(head, 11);
-    insertAtTail(head, 18);
-    insertAtTail(head, 1);
-    insertAtTail(head, 5);
-    insertAtTail(head, 8);
-    insertAtTail(head, 10);
-    insertAtTail(head, 5);
-    insertAtTail(head, 11);
+    
+    insertAtTail(head, 28);
+    insertAtTail(head, 41);
+    insertAtTail(head, 45);
+    insertAtTail(head, 51);
+    
     
     node* head2 = NULL;
     insertAtTail(head2, 16);
+    
+    insertAtTail(head2, 35);
     insertAtTail(head2, 50);
-    insertAtTail(head2, 17);
     // display(head);
     // appendKNodes(head, 2, 6);
-    intersect(head, head2, 6);
-    cout<<intersectionPoint(head, head2)<<endl;
+    // intersect(head, head2, 6);
+    // cout<<intersectionPoint(head, head2)<<endl;
     display(head);
     display(head2);
+    node* mergedHead = mergeRecursive(head, head2);
+    cout<<length(mergedHead)<<endl;
+    display(mergedHead);
     // display(head);
     // node* newHead = reversek(head,2);
     // display(head);
