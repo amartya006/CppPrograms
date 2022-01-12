@@ -25,7 +25,7 @@ void reverseString(string str){
 }
 
 int main(){
-    string str = "Hello my name is Amartya Nigam";
+    string str = "Hello my name is Amartya. Nigam";
     reverseString(str);
     return 0;
 }

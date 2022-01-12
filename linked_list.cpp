@@ -125,15 +125,26 @@ node* reversek(node* &head, int k){
     node* currPtr = head;
     node* nextPtr;
     int count = 0;
-    while(currPtr != NULL && count<k){
+    
+    
+        while(currPtr != NULL && count<k){
         nextPtr = currPtr->next;
         currPtr->next = prevPtr;
         prevPtr = currPtr;
         currPtr = nextPtr;
         count++;
-    }
+    
+    } 
+    
     if(nextPtr != NULL){
-        head->next = reversek(nextPtr, k);
+        int l = length(nextPtr)-1;
+        
+        if(l>=k){
+            head->next = reversek(nextPtr, k);
+        } else{
+            head->next = nextPtr;
+        }
+        
     }
  
     return prevPtr;
@@ -354,9 +365,11 @@ int main(){
     insertAtTail(head, 5);
     insertAtTail(head, 6);
     insertAtTail(head, 7);
+    insertAtTail(head, 8);
     display(head);
-    evenAfterOdd(head);
-    display(head);
+    // cout<<length(head);
+    // evenAfterOdd(head);
+    // display(head);
     
     
     // node* head2 = NULL;
@@ -374,7 +387,7 @@ int main(){
     // cout<<length(mergedHead)<<endl;
     // display(mergedHead);
     // display(head);
-    // node* newHead = reversek(head,2);
+    node* newHead = reversek(head,3);
     // display(head);
     // cout<<search(head, 10);
     // deletion(head, 8);
@@ -389,6 +402,6 @@ int main(){
     // display(head);
     
     // node* myHead = reverse(head);
-    // display(myHead);
+    display(newHead);
     return 0;
 }
