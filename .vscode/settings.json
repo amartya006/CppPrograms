@@ -3,7 +3,8 @@
         "bitset": "cpp",
         "chrono": "cpp",
         "algorithm": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "vector": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

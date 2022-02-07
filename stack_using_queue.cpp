@@ -1,3 +1,5 @@
+//Method 1: Costly Push
+
 #include<bits/stdc++.h>
 using namespace std;
 
